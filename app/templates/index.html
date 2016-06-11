@@ -24,10 +24,10 @@
   <body>
 	<div class="container page">
 		<div class="page-header">
-  			<h1>It is a simple Flask app <small>counter of hot and cold water</small></h1>
+  			<h1>It is a simple Flask app <small>work with logging python lib</small></h1>
 		</div>
-		<div class= "container content">
-			<div class="row">
+		<div class= "container">
+			<div class="row sender">
 				<div class = "col-sm-7 col-sm-offset-1">
 					<h3 class="text-center">  Click on the button to send data of yours counters </h3>
 				</div>
@@ -35,7 +35,30 @@
 					<input class="btn btn-default submit-button" type="submit" value="Submit">
 				</div>
 			</div>
-			
+			<div class = "row">
+				<div class="col-sm-6">
+					<button type="button" id="show-error-log" class="btn btn-default show-log-btn" data-target="errors">Error log</button>
+					<p class="text-center show-log-text"> Press the "Error log" button for show error log of app </p>
+					<p class="text-center hide-log-text"> Press the "Error log" button for hide error log of app </p>
+					<div class="row-fluid log-container" id = "error-log-container">
+						<div class="control">
+						</div>
+						<div class="log-area col-sm-12">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 container">
+					<button type="button" id="request-log" class="btn btn-default show-log-btn" data-target="request">Request log</button>
+					<p class="text-center show-log-text"> Press the "Request log" button for show request log of app </p>
+					<p class="text-center hide-log-text"> Press the "Error log" button for hide request log of app </p>
+					<div class="row-fluid log-container" id = "request-log-container">
+						<div class="control">
+						</div>
+						<div class="log-area col-sm-12">
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div>

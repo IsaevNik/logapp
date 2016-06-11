@@ -1,8 +1,45 @@
-.content {
-	background-color: #A6A6FF;
+.sender {
+	background-color: #C89FFF;
+	padding: 40px 0;
+	margin-bottom: 20px;
 }
 
 .submit-button {
 	width: 100%;
-	margin-top: 18px;
+	margin-top: 15px;
+}
+
+.btn {
+	font-size: 18px;
+}
+
+.show-log-btn {
+	width: 100%;
+}
+
+#error-log-container, #request-log-container {
+	background-color: #A6A6FF;
+	display: none;
+}
+
+.hide-log-text {
+	display: none;
+}
+
+.log-area {
+	overflow: scroll;
+	background-color: #f9f2f4;
+	height: 400px;
+}
+#request-log-container .log-area > pre {
+	color: #29298D;
+}
+
+#error-log-container .log-area > pre {
+	color: #c7254e;
+}
+
+pre {
+	margin-top: 10px;
+	word-wrap: normal;
 }

@@ -1,7 +1,5 @@
 function main() {
 
-
-
 	$(".submit-button").on("click", function(){
 		var counterData = {
 							"sn": "13817406", 
@@ -38,15 +36,36 @@ function main() {
 		$.ajax({
  			url: '/datareceiver',
  			type: 'POST',
- 			contentType: "application/json; charset=ascii",			
+ 			contentType: "application/json; charset=utf-8",			
  			data: JSON.stringify(counterData),
  			
  			success: function(response) {
+ 				console.log(response);
  			},
- 			error: function(error) {
- 			}
- 		});
+ 		});	
 	});
+
+	$(".show-log-btn").on("click", function(){
+		var filename = $(this).attr("data-target") + ".log"
+		var thisLogArea = $(this).siblings(".log-container").children(".log-area");
+		if($(this).siblings(".log-container").css("display") == "none"){
+			$.ajax({
+	 			url: '/getlog',
+	 			type: 'POST',
+	 			contentType: "application/json; charset=utf-8",			
+	 			data: JSON.stringify(filename),
+ 			
+	 			success: function(response) {
+	 				console.log(response);
+	 				$(thisLogArea).html(response);
+	 			},
+ 			});	
+		}
+		
+		$(this).siblings(".show-log-text").toggle();
+		$(this).siblings(".hide-log-text").toggle();
+		$(this).siblings(".log-container").slideToggle();
+ 	});
 }
 
 $(document).ready(main)
