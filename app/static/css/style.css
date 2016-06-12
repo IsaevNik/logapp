@@ -9,7 +9,7 @@
 	margin-top: 15px;
 }
 
-.btn {
+.btn-default {
 	font-size: 18px;
 }
 
@@ -25,11 +25,14 @@
 .hide-log-text {
 	display: none;
 }
-
 .log-area {
-	overflow: scroll;
-	background-color: #f9f2f4;
 	height: 400px;
+}
+#error-log-container .log-area {
+	background-color: #f9f2f4;
+}
+#request-log-container .log-area {
+	background-color: #f4f2f9;
 }
 #request-log-container .log-area > pre {
 	color: #29298D;
@@ -39,7 +42,19 @@
 	color: #c7254e;
 }
 
+.control-container {
+	padding: 10px 30px;
+
+}
+
 pre {
 	margin-top: 10px;
 	word-wrap: normal;
+	overflow: scroll;
+	height: 95%;
 }
+
+input[disabled]:hover {
+	cursor: not-allowed;;
+}
+

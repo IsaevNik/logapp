@@ -41,7 +41,16 @@
 					<p class="text-center show-log-text"> Press the "Error log" button for show error log of app </p>
 					<p class="text-center hide-log-text"> Press the "Error log" button for hide error log of app </p>
 					<div class="row-fluid log-container" id = "error-log-container">
-						<div class="control">
+						<div class="control-container row-fluid">
+							<div class="control">
+							</div>
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" id="is-today" checked> Today
+						  		</label>
+							</div>
+							<input type="date" id="user-date" disabled>
+							<button type="submit" class="btn btn-xs" id="refresh-error">Refresh</button>
 						</div>
 						<div class="log-area col-sm-12">
 						</div>

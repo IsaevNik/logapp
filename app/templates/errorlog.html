@@ -1,0 +1,6 @@
+<pre>
+	{%- for error in errors -%}
+		<b>[{{error.get('datetime')}}]</b> {{error.get('msg')-}}
+		<i>{{error.get('stacktrace')}}</i>
+	{%- endfor -%}
+</pre>
