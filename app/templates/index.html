@@ -42,15 +42,24 @@
 					<p class="text-center hide-log-text"> Press the "Error log" button for hide error log of app </p>
 					<div class="row-fluid log-container" id = "error-log-container">
 						<div class="control-container row-fluid">
-							<div class="control">
+							<label>Errors in log: </label>
+							<ul class="control"> 
+							</ul>
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" id="is-all-errors" checked> All errors
+						  		</label>
 							</div>
+							<label for="user-choise-error">Enter the errors name</label>
+							<input type="text" class="form-control" id="user-choise-error" placeholder="NameError1 NameError2" disabled>
 							<div class="checkbox">
 						 		<label>
 						    		<input type="checkbox" id="is-today" checked> Today
 						  		</label>
 							</div>
-							<input type="date" id="user-date" disabled>
-							<button type="submit" class="btn btn-xs" id="refresh-error">Refresh</button>
+							<label for="user-date">Enter the date</label>
+							<input type="date" class="form-control" id="user-date" disabled>
+							<button type="submit" class="btn btn-default" id="refresh-error">Refresh</button>
 						</div>
 						<div class="log-area col-sm-12">
 						</div>
@@ -61,7 +70,37 @@
 					<p class="text-center show-log-text"> Press the "Request log" button for show request log of app </p>
 					<p class="text-center hide-log-text"> Press the "Error log" button for hide request log of app </p>
 					<div class="row-fluid log-container" id = "request-log-container">
-						<div class="control">
+						<div class="control-container row-fluid">
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" class="ch" id="is-all-ip" checked> All IPs
+						  		</label>
+							</div>
+							<label for="user-choise-error">Enter the IP</label>
+							<input type="text" class="form-control" id="user-choise-ip" placeholder="IP adress" disabled>
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" class="ch" id="is-all-sn" checked> All counter numbers
+						  		</label>
+							</div>
+							<label for="user-choise-sn">Enter the number of counter</label>
+							<input type="text" class="form-control" id="user-choise-sn" placeholder="Number" disabled>
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" class="unch" id="is-day-request"> Day of request
+						  		</label>
+							</div>
+							<label for="user-date-request">Enter the date of request</label>
+							<input type="date" class="form-control" id="user-date-request" disabled>
+							<div class="checkbox">
+						 		<label>
+						    		<input type="checkbox" class="unch" id="is-someday"> From some date to today counter information
+						  		</label>
+							</div>
+							<label for="from-start-date">Enter some date</label>
+							<input type="date" class="form-control" id="from-start-date" disabled>
+
+							<button type="submit" class="btn btn-default" id="refresh-request">Refresh</button>
 						</div>
 						<div class="log-area col-sm-12">
 						</div>

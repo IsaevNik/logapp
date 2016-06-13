@@ -18,8 +18,13 @@
 }
 
 #error-log-container, #request-log-container {
-	background-color: #A6A6FF;
 	display: none;
+}
+#request-log-container {
+	background-color: #A6A6FF;
+}
+#error-log-container {
+	background-color: #FFA6A6;
 }
 
 .hide-log-text {
@@ -47,6 +52,10 @@
 
 }
 
+.control {
+	padding-left: 15px;
+}
+
 pre {
 	margin-top: 10px;
 	word-wrap: normal;
@@ -58,3 +67,23 @@ input[disabled]:hover {
 	cursor: not-allowed;;
 }
 
+.ip {
+	background-color: #000;
+	color: #fff;
+	font-weight: bold;
+}
+
+.sn {
+	color: #22a613;
+}
+.data-item {
+}
+
+.counter {
+	color: #7F3F45;
+}
+
+#refresh-error, #refresh-request {
+	margin-top: 10px;
+	font-size: 16px;
+}

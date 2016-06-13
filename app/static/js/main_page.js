@@ -1,5 +1,5 @@
 function main() {
-
+	//submit counter data
 	$(".submit-button").on("click", function(){
 		var counterData = {
 							"sn": "13817406", 
@@ -45,9 +45,33 @@ function main() {
  		});	
 	});
 
+	function resetErrorControle(controlElement){
+		$(controlElement).find('input:checkbox').each(function(){
+			$(this).prop("checked", true);
+		});
+		$(controlElement).find('input.form-control').each(function(){
+			$(this).val("");
+			$(this).attr('disabled', 'disabled');
+		});
+	}
+	function resetRequestControle(controlElement){
+		$(controlElement).find('.ch:checkbox').each(function(){
+			$(this).prop("checked", true);
+		});
+		$(controlElement).find('.unch:checkbox').each(function(){
+			$(this).prop("checked", false);
+		});
+		$(controlElement).find('input.form-control').each(function(){
+			$(this).val("");
+			$(this).attr('disabled', 'disabled');
+		});
+	}
+
+	//show error or request log
 	$(".show-log-btn").on("click", function(){
-		var filename = $(this).attr("data-target") + ".log"
+		var filename = $(this).attr("data-target");
 		var thisLogArea = $(this).siblings(".log-container").children(".log-area");
+		var thisControlArea = $(this).siblings(".log-container").find(".control")
 		if($(this).siblings(".log-container").css("display") == "none"){
 			$.ajax({
 	 			url: '/getlog',
@@ -56,20 +80,34 @@ function main() {
 	 			data: JSON.stringify(filename),
  			
 	 			success: function(response) {
-	 				//console.log(response);
-	 				$(".control").html(response['control'])
+	 				$(thisControlArea).html(response['control'])
 	 				$(thisLogArea).html(response['log']);
 	 			},
  			});	
+		} else {
+			var controlElement = $(this).siblings(".log-container").first();
+			if (filename == "errors")
+				resetErrorControle(controlElement);
+			else
+				resetRequestControle(controlElement);
 		}
-		
 		$(this).siblings(".show-log-text").toggle();
 		$(this).siblings(".hide-log-text").toggle();
 		$(this).siblings(".log-container").slideToggle();
+		
  	});
 
+	$("input:checkbox").on('change', function() {
+ 		var thisInput = $(this).parents(".checkbox").next().next();
+		if ($(thisInput).attr('disabled')) {
+        	$(thisInput).removeAttr('disabled');
+    	} else {
+        	$(thisInput).attr('disabled', 'disabled');
+    	}
+	});
+	//refresh error log
  	$("#refresh-error").on("click", function() {
- 		user_request = {}
+ 		var user_request = {}
  		if ($("#is-today").prop("checked")) {
  			var now = new Date();
  			var dt = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("-");
@@ -80,20 +118,14 @@ function main() {
  			return false;
  		user_request["date"] = dt;
 
- 		var errors = new Array();
- 		var num_of_types = 0;
- 		$(".type-of-error").each(function(){
- 			num_of_types ++;
- 			if ($(this).prop("checked")) {
- 				errors.push($(this).parent().text().trim());
- 			}
- 		});
- 		num_of_types /= 2;
- 		var l = errors.length - num_of_types;
- 		errors = errors.slice(0, l);
-
- 		user_request["errors"] = errors;
-
+ 		if ($('#is-all-errors').prop("checked")) {
+ 			user_request["errors"] = "";
+ 		} else {
+ 			user_request["errors"] = $("#user-choise-error").val();
+ 			if (!user_request["errors"])
+ 				return false;
+ 		}
+ 		
  		$.ajax({
 	 			url: '/errorlogfilter',
 	 			type: 'POST',
@@ -106,13 +138,49 @@ function main() {
  			});
 
  	});
- 	$("#is-today:checkbox").on('change', function() {
-		if ($('#user-date').attr('disabled')) {
-        	$('#user-date').removeAttr('disabled');
-    	} else {
-        	$('#user-date').attr('disabled', 'disabled');
-    	}
-	});
+ 	$("#refresh-request").on("click", function() {
+		var user_request = {};
+		if ($("#is-all-ip").prop("checked")) {
+			user_request['ip'] = ""
+		} else {
+			user_request['ip'] = $("#user-choise-ip").val()
+			if (!user_request["ip"])
+ 				return false;
+		}
+		if ($("#is-day-request").prop("checked")) {
+			user_request['request_date'] = $("#user-date-request").val()
+			if (!user_request["request_date"])
+ 				return false;
+		} else {
+			user_request['request_date'] = ""
+			
+		}
+		if ($("#is-all-sn").prop("checked")) {
+			user_request['sn'] = ""
+		} else {
+			user_request['sn'] = $("#user-choise-sn").val()
+			if (!user_request["sn"])
+ 				return false;
+		}
+		if ($("#is-someday").prop("checked")) {
+			user_request['start_date'] = $("#from-start-date").val()
+			if (!user_request["start_date"])
+ 				return false;
+		} else {
+			user_request['start_date'] = ""
+			
+		}
+		$.ajax({
+	 			url: '/requestlogfilter',
+	 			type: 'POST',
+	 			contentType: "application/json; charset=utf-8",			
+	 			data: JSON.stringify(user_request),
+ 			
+	 			success: function(response) {
+	 				$("#request-log-container .log-area").html(response['log']);
+	 			},
+ 			});
+ 	});
 }
 
 $(document).ready(main)
