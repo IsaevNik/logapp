@@ -1,9 +1,9 @@
 <pre>
 {%-for request in requests-%}
 	<b>[{{request.get('datetime')}}]</b> IP: <span class="ip">{{request.get('ip')}}</span>
-	<span class="sn"><b>sn : {{request.get("request body").get("sn")-}}</b></span>
+	<span class="sn"><b>sn : {{request.get("request_body").get("sn")-}}</b></span>
 	<span>data :</span>
-	{%-for data_item in request.get("request body")["data"]%}
+	{%-for data_item in request.get("request_body")["data"]%}
 		<span class="data-item"><b>readout_dt : {{data_item.get("readout_dt")}}</b></span>
 		<span class="data-item"><b>id : {{data_item.get("id")}}</b></span>
 		<span class="data-item">counters :</span>

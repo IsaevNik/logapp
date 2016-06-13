@@ -1,5 +1,5 @@
 function main() {
-	//submit counter data
+	// Submit counter data to '/datareceiver' url and load response
 	$(".submit-button").on("click", function(){
 		var counterData = {
 							"sn": "13817406", 
@@ -44,7 +44,7 @@ function main() {
  			},
  		});	
 	});
-
+	// Reset controle form of error log.
 	function resetErrorControle(controlElement){
 		$(controlElement).find('input:checkbox').each(function(){
 			$(this).prop("checked", true);
@@ -54,6 +54,7 @@ function main() {
 			$(this).attr('disabled', 'disabled');
 		});
 	}
+	// Reset controle form of request log.
 	function resetRequestControle(controlElement){
 		$(controlElement).find('.ch:checkbox').each(function(){
 			$(this).prop("checked", true);
@@ -67,7 +68,9 @@ function main() {
 		});
 	}
 
-	//show error or request log
+	/* Send ajax request to server with information about what kind of 
+	log user want to open if user click a button when log is open - close
+	log, and reset controle panel*/
 	$(".show-log-btn").on("click", function(){
 		var filename = $(this).attr("data-target");
 		var thisLogArea = $(this).siblings(".log-container").children(".log-area");
@@ -96,7 +99,7 @@ function main() {
 		$(this).siblings(".log-container").slideToggle();
 		
  	});
-
+	// Make able or desable input fild depending on the apropriate checkbox
 	$("input:checkbox").on('change', function() {
  		var thisInput = $(this).parents(".checkbox").next().next();
 		if ($(thisInput).attr('disabled')) {
@@ -105,7 +108,8 @@ function main() {
         	$(thisInput).attr('disabled', 'disabled');
     	}
 	});
-	//refresh error log
+	/* Send to server ajax request with information about user choice 
+	and display filtered error log*/
  	$("#refresh-error").on("click", function() {
  		var user_request = {}
  		if ($("#is-today").prop("checked")) {
@@ -134,10 +138,13 @@ function main() {
  			
 	 			success: function(response) {
 	 				$("#error-log-container .log-area").html(response['log']);
+	 				$("#error-log-container .control").html(response['control'])
 	 			},
  			});
 
  	});
+ 	/* Send to server ajax request with information about user choice 
+	and display filtered request log*/
  	$("#refresh-request").on("click", function() {
 		var user_request = {};
 		if ($("#is-all-ip").prop("checked")) {
